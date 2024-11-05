@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roulette Game</title>
+  <title>WELCOME BABY BOY OR GIRL</title>
   <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      margin-top: 20px;
+    }
     .roulette-container {
       position: relative;
       width: 300px;
@@ -19,6 +26,17 @@
       transform: rotate(0deg);
       transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
     }
+    .pointer {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid red;
+      transform: translateX(-50%);
+    }
     button {
       display: block;
       margin: 20px auto;
@@ -29,10 +47,12 @@
 </head>
 <body>
 
+  <h1>WELCOME BABY BOY OR GIRL</h1>
   <div class="roulette-container">
+    <div class="pointer"></div>
     <div class="roulette-wheel" id="wheel"></div>
-    <button onclick="startRoulette()">Start</button>
   </div>
+  <button onclick="startRoulette()">Start</button>
 
   <script>
     function startRoulette() {
