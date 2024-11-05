@@ -6,71 +6,65 @@
   <title>WELCOME BABY BOY OR GIRL</title>
   <style>
     body {
-      text-align: center;
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 50%, #8ec5fc 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
     }
     h1 {
-      margin-top: 20px;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
     .roulette-container {
       position: relative;
-      width: 300px;
-      height: 300px;
+      width: 350px;
+      height: 350px;
       margin: 0 auto;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
     }
     .roulette-wheel {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: conic-gradient(pink 0% 10%, lightblue 10% 20%, pink 20% 30%, lightblue 30% 40%, pink 40% 50%, lightblue 50% 60%, pink 60% 70%, lightblue 70% 80%, pink 80% 90%, lightblue 90% 100%);
+      background: conic-gradient(#FFC0CB 0% 50%, #ADD8E6 50% 100%);
       transform: rotate(0deg);
       transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
     }
+    .roulette-labels {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      pointer-events: none;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .roulette-label {
+      color: #333;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    }
     .pointer {
       position: absolute;
-      top: 0;
+      top: -10px;
       left: 50%;
       width: 0;
       height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 20px solid red;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 30px solid red;
       transform: translateX(-50%);
     }
     button {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 16px;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>WELCOME BABY BOY OR GIRL</h1>
-  <div class="roulette-container">
-    <div class="pointer"></div>
-    <div class="roulette-wheel" id="wheel"></div>
-  </div>
-  <button onclick="startRoulette()">Start</button>
-
-  <script>
-    function startRoulette() {
-      const wheel = document.getElementById("wheel");
-      const randomRotation = 360 * 5 + Math.random() * 360;
-      let finalRotation = randomRotation;
-
-      // 女性で止まりそうに見せて、最終的に男性に止まる演出
-      finalRotation -= 36;  // 女性に近い位置で減速するよう調整
-      setTimeout(() => {
-        finalRotation += 18;  // 最終的に男性に止まるように調整
-        wheel.style.transform = `rotate(${finalRotation}deg)`;
-      }, 4500); // 最終調整を5秒経過直前に発動
-
-      // ルーレット開始
-      wheel.style.transform = `rotate(${finalRotation}deg)`;
-    }
-  </script>
-
-</body>
-</html>
+      display:
