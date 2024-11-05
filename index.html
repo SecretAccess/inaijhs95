@@ -71,15 +71,16 @@
 
     .pointer {
       position: absolute;
-      top: -15px;
+      top: 10px;
       left: 50%;
-      width: 0;
-      height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-bottom: 30px solid #ff4d4d;
-      transform: translateX(-50%);
+      width: 6px;
+      height: 100px;
+      background-color: #ff4d4d;
+      transform-origin: bottom;
+      transform: translateX(-50%) rotate(0deg);
       z-index: 10; /* 最前面に配置 */
+      border-radius: 3px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
 
     button {
@@ -121,7 +122,7 @@
 
   <div class="roulette-container">
     <div class="roulette-wheel" id="wheel"></div>
-    <div class="pointer"></div> <!-- 針を最前面に配置 -->
+    <div class="pointer"></div> <!-- 針を時計の針のように変更 -->
   </div>
 
   <button onclick="startRoulette()">Reveal Gender</button>
@@ -137,20 +138,15 @@
       const randomRotation = 360 * 5 + Math.random() * 360;
       let finalRotation = randomRotation;
 
-      // 演出: 一度「GIRL」で止まりそうに見せて、最終的に「BOY」に止まる
-      finalRotation -= 18; // 一度「GIRL」に近づくように調整
+      // 常に「BOY」で止まるように、最終的にBOYセクションに調整
+      finalRotation -= (finalRotation % 36); // 最後の位置を"BOY"セクションに合わせる
       setTimeout(() => {
-        finalRotation += 36; // 最終的に「BOY」に止まるように調整
         wheel.style.transform = `rotate(${finalRotation}deg)`;
-        
+
         // 結果を表示
         setTimeout(() => {
           resultMessage.style.display = "block";
-          if (finalRotation % 360 > 180) {
-            resultMessage.textContent = "It's a GIRL!";
-          } else {
-            resultMessage.textContent = "It's a BOY!";
-          }
+          resultMessage.textContent = "It's a BOY!";
         }, 5000); // 回転が終わった後に結果を表示
       }, 4500); // 5秒の回転後に最終調整を実行
 
