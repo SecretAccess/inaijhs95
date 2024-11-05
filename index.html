@@ -45,7 +45,13 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: conic-gradient(#FFC0CB 0% 50%, #ADD8E6 50% 100%);
+      background: conic-gradient(
+        pink 0% 10%, lightblue 10% 20%, 
+        pink 20% 30%, lightblue 30% 40%, 
+        pink 40% 50%, lightblue 50% 60%, 
+        pink 60% 70%, lightblue 70% 80%, 
+        pink 80% 90%, lightblue 90% 100%
+      );
       transform: rotate(0deg);
       transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
     }
@@ -56,12 +62,9 @@
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: center;
       pointer-events: none;
       font-weight: bold;
-    }
-
-    .roulette-label {
       font-size: 1.5em;
       color: #333;
     }
@@ -76,6 +79,7 @@
       border-right: 15px solid transparent;
       border-bottom: 30px solid #ff4d4d;
       transform: translateX(-50%);
+      z-index: 10; /* 最前面に配置 */
     }
 
     button {
@@ -95,6 +99,14 @@
       background-color: #ff7373;
     }
 
+    .result-message {
+      display: none;
+      font-size: 2em;
+      font-weight: bold;
+      color: #ff4d4d;
+      margin-top: 30px;
+    }
+
     footer {
       margin-top: 20px;
       font-size: 0.9em;
@@ -108,30 +120,39 @@
   <p class="subtitle">Let’s find out the gender of the baby!</p>
 
   <div class="roulette-container">
-    <div class="pointer"></div>
     <div class="roulette-wheel" id="wheel"></div>
-    <div class="roulette-labels">
-      <div class="roulette-label">BOY</div>
-      <div class="roulette-label">GIRL</div>
-    </div>
+    <div class="pointer"></div> <!-- 針を最前面に配置 -->
   </div>
 
   <button onclick="startRoulette()">Reveal Gender</button>
+  <p class="result-message" id="resultMessage"></p>
 
   <footer>Click the button to reveal the gender!</footer>
 
   <script>
     function startRoulette() {
       const wheel = document.getElementById("wheel");
+      const resultMessage = document.getElementById("resultMessage");
+      resultMessage.style.display = "none";  // 前の結果を隠す
       const randomRotation = 360 * 5 + Math.random() * 360;
       let finalRotation = randomRotation;
 
-      // 一度「GIRL」で止まりそうに見せて、最終的に「BOY」に止まる演出
+      // 演出: 一度「GIRL」で止まりそうに見せて、最終的に「BOY」に止まる
       finalRotation -= 18; // 一度「GIRL」に近づくように調整
       setTimeout(() => {
         finalRotation += 36; // 最終的に「BOY」に止まるように調整
         wheel.style.transform = `rotate(${finalRotation}deg)`;
-      }, 4500); // 5秒後に最終調整を実行
+        
+        // 結果を表示
+        setTimeout(() => {
+          resultMessage.style.display = "block";
+          if (finalRotation % 360 > 180) {
+            resultMessage.textContent = "It's a GIRL!";
+          } else {
+            resultMessage.textContent = "It's a BOY!";
+          }
+        }, 5000); // 回転が終わった後に結果を表示
+      }, 4500); // 5秒の回転後に最終調整を実行
 
       // ルーレット開始
       wheel.style.transform = `rotate(${finalRotation}deg)`;
