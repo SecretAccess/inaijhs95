@@ -1,73 +1,56 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>クリックゲーム</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .score {
-            font-size: 2em;
-            margin: 20px;
-        }
-        .click-button {
-            padding: 15px 30px;
-            font-size: 1.5em;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .click-button:hover {
-            background-color: #0056b3;
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #666;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roulette Game</title>
+  <style>
+    .roulette-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+    }
+    .roulette-wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(pink 0% 10%, lightblue 10% 20%, pink 20% 30%, lightblue 30% 40%, pink 40% 50%, lightblue 50% 60%, pink 60% 70%, lightblue 70% 80%, pink 80% 90%, lightblue 90% 100%);
+      transform: rotate(0deg);
+      transition: transform 5s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>クリックゲーム</h1>
-        <p class="score">スコア: <span id="score">0</span></p>
-        <button class="click-button" onclick="increaseScore()">クリックしてスコアを増やそう！</button>
-        <p class="message" id="message"></p>
-    </div>
 
-    <script>
-        let score = 0;
+  <div class="roulette-container">
+    <div class="roulette-wheel" id="wheel"></div>
+    <button onclick="startRoulette()">Start</button>
+  </div>
 
-        function increaseScore() {
-            score++;
-            document.getElementById("score").innerText = score;
-            updateMessage();
-        }
+  <script>
+    function startRoulette() {
+      const wheel = document.getElementById("wheel");
+      const randomRotation = 360 * 5 + Math.random() * 360;
+      let finalRotation = randomRotation;
 
-        function updateMessage() {
-            const messageElement = document.getElementById("message");
+      // 女性で止まりそうに見せて、最終的に男性に止まる演出
+      finalRotation -= 36;  // 女性に近い位置で減速するよう調整
+      setTimeout(() => {
+        finalRotation += 18;  // 最終的に男性に止まるように調整
+        wheel.style.transform = `rotate(${finalRotation}deg)`;
+      }, 4500); // 最終調整を5秒経過直前に発動
 
-            if (score < 10) {
-                messageElement.innerText = "まだまだこれからだ！";
-            } else if (score < 20) {
-                messageElement.innerText = "いい感じ！その調子！";
-            } else if (score < 30) {
-                messageElement.innerText = "すごい！もうすぐハイスコア！";
-            } else {
-                messageElement.innerText = "おめでとう！最高スコアを達成しました！";
-            }
-        }
-    </script>
+      // ルーレット開始
+      wheel.style.transform = `rotate(${finalRotation}deg)`;
+    }
+  </script>
+
 </body>
 </html>
