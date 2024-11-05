@@ -53,7 +53,7 @@
         pink 80% 90%, lightblue 90% 100%
       );
       transform: rotate(0deg);
-      transition: transform 3s cubic-bezier(0.33, 1, 0.68, 1);
+      transition: transform 10s cubic-bezier(0.33, 1, 0.68, 1);
     }
 
     .pointer {
@@ -128,7 +128,7 @@
       const finalRotation = firstRotation + 36; // その後「BOY」の中心に移動
 
       // 最初のゆっくり回転で「GIRL」付近に止まりそうにする
-      wheel.style.transition = "transform 3s ease-out";
+      wheel.style.transition = "transform 10s ease-out";
       wheel.style.transform = `rotate(${firstRotation}deg)`;
 
       // 少し止まった後、加速して「BOY」中心で止まる
@@ -141,7 +141,7 @@
           resultMessage.style.display = "block";
           resultMessage.textContent = "It's a BOY!";
         }, 500); // 最後の加速後に結果を表示
-      }, 3000); // 3秒後に加速して最終的な位置に移動
+      }, 9500); // 10秒の回転後に加速して最終的な位置に移動
     }
   </script>
 
